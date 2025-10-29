@@ -186,17 +186,7 @@ class FAISSService:
             logger.info(f"Added person to FAISS: {name}")
     
     def search(self, embedding: np.ndarray, threshold: float = 0.6, top_k: int = 1) -> List[Tuple[Optional[str], float]]:
-        """
-        Search for similar faces
         
-        Args:
-            embedding: Face embedding vector
-            threshold: Similarity threshold (0-1)
-            top_k: Number of results to return
-            
-        Returns:
-            List of (name, confidence) tuples
-        """
         with self.lock:
             if not self.initialized:
                 self.initialize()

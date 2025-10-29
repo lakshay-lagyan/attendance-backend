@@ -1,0 +1,58 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# Documentation
+*.md
+docs/
+README.md
+
+# Tests
+tests/
+.pytest_cache/
+.coverage
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Logs
+*.log
+logs/
+
+# Temp files
+tmp/
+temp/
+*.tmp
+
+# Development
+docker-compose.yml
+docker-compose.*.yml
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db

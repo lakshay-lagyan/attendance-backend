@@ -33,7 +33,7 @@ class User(db.Model):
     department = db.Column(db.String(100), default='')
     phone = db.Column(db.String(20), default='')
     profile_image = db.Column(db.Text, default='')
-    status = db.Column(db.String(20), default='active')  # active, blocked
+    status = db.Column(db.String(20), default='active')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
     def to_dict(self):
@@ -105,7 +105,7 @@ class EnrollmentRequest(db.Model):
     phone = db.Column(db.String(20), default='')
     password_hash = db.Column(db.String(255), nullable=False)
     images = db.Column(db.JSON, nullable=False)
-    status = db.Column(db.String(20), default='pending')  # pending, approved, rejected
+    status = db.Column(db.String(20), default='pending')
     submitted_at = db.Column(db.DateTime, default=datetime.utcnow)
     processed_at = db.Column(db.DateTime, nullable=True)
     processed_by = db.Column(db.String(120), nullable=True)

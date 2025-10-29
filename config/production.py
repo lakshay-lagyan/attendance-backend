@@ -1,3 +1,4 @@
+
 import os
 from datetime import timedelta
 
@@ -5,7 +6,7 @@ class ProductionConfig:
     """Production configuration with performance optimizations"""
     
     # Flask
-    SECRET_KEY = os.getenv('FLASK_SECRET', os.urandom(32))
+    SECRET_KEY = os.getenv('FLASK_SECRET', os.urandom(32).hex())  # FIXED
     DEBUG = False
     TESTING = False
     
@@ -16,33 +17,34 @@ class ProductionConfig:
     
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ENGINE_OPTIONS = {
-        'pool_size': 20,                   
-        'pool_recycle': 3600,              
-        'pool_pre_ping': True,            
-        'max_overflow': 30,                 
-        'pool_timeout': 30,               
-        'echo': False,                      
+        'pool_size': 20,
+        'pool_recycle': 3600,
+        'pool_pre_ping': True,
+        'max_overflow': 30,
+        'pool_timeout': 30,
+        'echo': False,
         'connect_args': {
             'connect_timeout': 10,
-            'options': '-c statement_timeout=30000'  
+            'options': '-c statement_timeout=30000'
         }
     }
     
     # Query optimization
-    SQLALCHEMY_RECORD_QUERIES = False      
-    SQLALCHEMY_COMMIT_ON_TEARDOWN = False  
+    SQLALCHEMY_RECORD_QUERIES = False
+    SQLALCHEMY_COMMIT_ON_TEARDOWN = False
+    
     # Redis Cache
     REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
     CACHE_TYPE = 'redis'
     CACHE_REDIS_URL = REDIS_URL
-    CACHE_DEFAULT_TIMEOUT = 3600           
+    CACHE_DEFAULT_TIMEOUT = 3600
     CACHE_KEY_PREFIX = 'attendance:'
     
     # Session
     SESSION_TYPE = 'redis'
     SESSION_REDIS = REDIS_URL
-    SESSION_COOKIE_SECURE = True            
-    SESSION_COOKIE_HTTPONLY = True          
+    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = 'Lax'
     PERMANENT_SESSION_LIFETIME = timedelta(hours=24)
     
@@ -60,11 +62,11 @@ class ProductionConfig:
     CORS_SUPPORTS_CREDENTIALS = True
     CORS_MAX_AGE = 3600
     
-    # Rate Limiting - Per endpoint configuration
+    # Rate Limiting
     RATELIMIT_STORAGE_URL = REDIS_URL
     RATELIMIT_STRATEGY = 'fixed-window'
     RATELIMIT_HEADERS_ENABLED = True
-    RATELIMIT_SWALLOW_ERRORS = True        
+    RATELIMIT_SWALLOW_ERRORS = True
     
     # Custom rate limits
     RATE_LIMITS = {
@@ -76,7 +78,7 @@ class ProductionConfig:
     }
     
     # Upload Settings
-    MAX_CONTENT_LENGTH = 10 * 1024 * 1024  # 10MB max upload
+    MAX_CONTENT_LENGTH = 10 * 1024 * 1024
     ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png'}
     UPLOAD_FOLDER = '/tmp/uploads'
     
@@ -85,21 +87,21 @@ class ProductionConfig:
     MIN_ENROLLMENT_IMAGES = int(os.getenv('MIN_IMAGES', '5'))
     MAX_ENROLLMENT_IMAGES = int(os.getenv('MAX_IMAGES', '10'))
     EMBEDDING_DIM = 512
-    FACE_DETECTION_BACKEND = 'opencv'      
-    FACE_RECOGNITION_MODEL = 'ArcFace'     
+    FACE_DETECTION_BACKEND = 'opencv'
+    FACE_RECOGNITION_MODEL = 'ArcFace'
     
     # FAISS Configuration
-    FAISS_INDEX_TYPE = 'IndexFlatIP'        
-    FAISS_CACHE_TTL = 3600                  
-    FAISS_REBUILD_THRESHOLD = 100          
+    FAISS_INDEX_TYPE = 'IndexFlatIP'
+    FAISS_CACHE_TTL = 3600
+    FAISS_REBUILD_THRESHOLD = 100
     
     # Image Processing
-    IMAGE_MAX_SIZE = (1024, 1024)          
-    IMAGE_QUALITY = 85                     
+    IMAGE_MAX_SIZE = (1024, 1024)
+    IMAGE_QUALITY = 85
     IMAGE_COMPRESSION = True
     IMAGE_FORMAT = 'JPEG'
     
-    # Background Tasks 
+    # Background Tasks (Celery)
     CELERY_BROKER_URL = REDIS_URL
     CELERY_RESULT_BACKEND = REDIS_URL
     CELERY_TASK_SERIALIZER = 'json'
@@ -120,7 +122,7 @@ class ProductionConfig:
     LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
     LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     LOG_FILE = os.getenv('LOG_FILE', 'app.log')
-    LOG_MAX_BYTES = 10 * 1024 * 1024       # 10MB
+    LOG_MAX_BYTES = 10 * 1024 * 1024
     LOG_BACKUP_COUNT = 5
     
     # Monitoring
@@ -142,26 +144,26 @@ class ProductionConfig:
     ENABLE_FACE_LIVENESS = os.getenv('ENABLE_LIVENESS', 'true').lower() == 'true'
     
     # Performance
-    SEND_FILE_MAX_AGE_DEFAULT = 31536000   
+    SEND_FILE_MAX_AGE_DEFAULT = 31536000
     COMPRESS_MIMETYPES = [
         'text/html', 'text/css', 'text/xml',
         'application/json', 'application/javascript'
     ]
     COMPRESS_LEVEL = 6
-    COMPRESS_MIN_SIZE = 500                
+    COMPRESS_MIN_SIZE = 500
     
     # Pagination
     DEFAULT_PAGE_SIZE = 20
     MAX_PAGE_SIZE = 100
     
     # Timeouts
-    REQUEST_TIMEOUT = 30                    # 30 seconds
-    DATABASE_QUERY_TIMEOUT = 10             # 10 seconds
-    FACE_RECOGNITION_TIMEOUT = 15           # 15 seconds
+    REQUEST_TIMEOUT = 30
+    DATABASE_QUERY_TIMEOUT = 10
+    FACE_RECOGNITION_TIMEOUT = 15
     
     # Backup
     BACKUP_ENABLED = os.getenv('BACKUP_ENABLED', 'true').lower() == 'true'
-    BACKUP_SCHEDULE = os.getenv('BACKUP_SCHEDULE', '0 2 * * *')  # Daily at 2 AM
+    BACKUP_SCHEDULE = os.getenv('BACKUP_SCHEDULE', '0 2 * * *')
     BACKUP_RETENTION_DAYS = int(os.getenv('BACKUP_RETENTION_DAYS', 30))
     
     @classmethod

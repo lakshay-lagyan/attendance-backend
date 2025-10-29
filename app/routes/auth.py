@@ -1,7 +1,8 @@
-from flask import Blueprint, request, jsonify, session
+from flask import request, jsonify, session
 from werkzeug.security import check_password_hash, generate_password_hash
 from app import db, limiter
-from app.models import Admin, User
+from app.models import Admin, User  
+from app.routes import auth_bp  
 
 @auth_bp.route('/login', methods=['POST'])
 @limiter.limit("10 per minute")
