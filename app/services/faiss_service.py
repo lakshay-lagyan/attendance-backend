@@ -55,7 +55,6 @@ class FAISSService:
         """Create empty FAISS index"""
         self.index = faiss.IndexFlatIP(self.embedding_dim)
         self.person_map = []
-        faiss.normalize_L2(self.index.index)  # Use L2 normalized vectors
     
     def _load_from_cache(self) -> bool:
         """Load FAISS index from Redis cache"""
@@ -107,7 +106,7 @@ class FAISSService:
         """Rebuild FAISS index from database"""
         try:
             from app import db
-            from app.models.user import Person
+            from app.models import Person  # FIXED: Changed from app.models.user
             
             # Create new index
             self._create_empty_index()
@@ -186,7 +185,7 @@ class FAISSService:
             logger.info(f"Added person to FAISS: {name}")
     
     def search(self, embedding: np.ndarray, threshold: float = 0.6, top_k: int = 1) -> List[Tuple[Optional[str], float]]:
-        
+        """Search for similar faces"""
         with self.lock:
             if not self.initialized:
                 self.initialize()
