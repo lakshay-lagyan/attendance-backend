@@ -1,8 +1,3 @@
-"""
-Redis Cache Service
-High-performance caching layer
-"""
-
 import logging
 import json
 import pickle
@@ -14,12 +9,11 @@ import hashlib
 logger = logging.getLogger(__name__)
 
 class CacheService:
-    """Redis cache service with fallback to memory"""
     
     def __init__(self):
         self.client = None
         self.available = False
-        self.memory_cache = {}  # Fallback in-memory cache
+        self.memory_cache = {}  
         self.hit_count = 0
         self.miss_count = 0
     
@@ -87,7 +81,7 @@ class CacheService:
             if self.is_available():
                 return self.client.setex(key, ttl, value)
             else:
-                # Fallback to memory cache (no TTL support)
+                # Fallback to memory cache 
                 self.memory_cache[key] = value
                 return True
                 
@@ -233,14 +227,7 @@ class CacheService:
 
 # Decorator for caching function results
 def cached(ttl: int = 3600, key_prefix: str = 'func'):
-    """
-    Decorator to cache function results
     
-    Usage:
-        @cached(ttl=3600, key_prefix='user')
-        def get_user(user_id):
-            return User.query.get(user_id)
-    """
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):

@@ -1,15 +1,10 @@
-"""
-Optimized FAISS Service
-High-performance vector similarity search with caching
-"""
-
 import logging
 import pickle
 import threading
 from typing import Optional, Tuple, List
 import numpy as np
 import faiss
-from app.services.cache_service import cache_service
+from app.services.cache import cache_service
 
 logger = logging.getLogger(__name__)
 

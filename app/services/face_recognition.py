@@ -1,7 +1,3 @@
-"""
-Optimized Face Recognition Service
-High-performance face detection and recognition
-"""
 
 import logging
 import io
@@ -26,7 +22,6 @@ class FaceRecognitionService:
         self._models_loaded = False
     
     def _load_models(self):
-        """Lazy load DeepFace models"""
         if self._models_loaded:
             return
         
@@ -40,15 +35,7 @@ class FaceRecognitionService:
             logger.error(f"Failed to load models: {e}")
     
     def preprocess_image(self, image_data) -> Optional[np.ndarray]:
-        """
-        Preprocess image with optimization
         
-        Args:
-            image_data: File object, bytes, or numpy array
-            
-        Returns:
-            Preprocessed image as numpy array
-        """
         try:
             # Convert to numpy array
             if hasattr(image_data, 'read'):
@@ -89,16 +76,7 @@ class FaceRecognitionService:
             return None
     
     def extract_embedding(self, image, timeout: int = 15) -> Optional[np.ndarray]:
-        """
-        Extract face embedding with timeout
         
-        Args:
-            image: Preprocessed image
-            timeout: Maximum time in seconds
-            
-        Returns:
-            Normalized embedding vector
-        """
         try:
             self._load_models()
             
@@ -150,16 +128,7 @@ class FaceRecognitionService:
             return None
     
     def extract_multiple_embeddings(self, images: List, timeout: int = 15) -> List[Optional[np.ndarray]]:
-        """
-        Extract embeddings from multiple images in parallel
         
-        Args:
-            images: List of images
-            timeout: Timeout per image
-            
-        Returns:
-            List of embeddings
-        """
         embeddings = []
         
         # Process in parallel
@@ -179,15 +148,7 @@ class FaceRecognitionService:
         return embeddings
     
     def compute_average_embedding(self, embeddings: List[np.ndarray]) -> Optional[np.ndarray]:
-        """
-        Compute average embedding from multiple faces
         
-        Args:
-            embeddings: List of embeddings
-            
-        Returns:
-            Average normalized embedding
-        """
         try:
             # Filter out None values
             valid_embeddings = [e for e in embeddings if e is not None]
@@ -211,8 +172,7 @@ class FaceRecognitionService:
         """
         Detect faces in image
         
-        Returns:
-            List of face bounding boxes
+        List of face bounding boxes
         """
         try:
             self._load_models()
@@ -231,16 +191,7 @@ class FaceRecognitionService:
             return []
     
     def is_real_face(self, face_image: np.ndarray, threshold: float = 50.0) -> bool:
-        """
-        Simple liveness detection using Laplacian variance
         
-        Args:
-            face_image: Face region image
-            threshold: Blur threshold (higher = sharper)
-            
-        Returns:
-            True if likely a real face
-        """
         try:
             # Convert to grayscale
             gray = cv.cvtColor(face_image, cv.COLOR_BGR2GRAY)
@@ -260,17 +211,7 @@ class FaceRecognitionService:
             return True  # Default to allowing
     
     def compress_image(self, image: np.ndarray, quality: int = 85, max_size: Tuple[int, int] = (1024, 1024)) -> bytes:
-        """
-        Compress image for storage
-        
-        Args:
-            image: Image as numpy array
-            quality: JPEG quality (1-100)
-            max_size: Maximum dimensions
-            
-        Returns:
-            Compressed image bytes
-        """
+       
         try:
             # Resize if necessary
             height, width = image.shape[:2]
@@ -302,9 +243,6 @@ class FaceRecognitionService:
     def validate_image(self, image_data) -> Tuple[bool, str]:
         """
         Validate uploaded image
-        
-        Returns:
-            (is_valid, error_message)
         """
         try:
             image = self.preprocess_image(image_data)

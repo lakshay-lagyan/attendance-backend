@@ -1,7 +1,3 @@
-"""
-Application Factory with Optimizations
-"""
-
 import logging
 from flask import Flask, jsonify
 from flask_compress import Compress
