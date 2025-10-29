@@ -28,12 +28,14 @@ RUN pip install --no-cache-dir --upgrade pip==23.3.1 setuptools==69.0.2 wheel==0
 # Copy only requirements first (better layer caching)
 COPY requirements.txt /tmp/requirements.txt
 
+# Install Flask ecosystem
 RUN pip install --no-cache-dir --timeout=300 \
     Flask==3.0.0 \
     Werkzeug==3.0.1 \
     gunicorn==21.2.0 \
     python-dotenv==1.0.0
 
+# Install database packages
 RUN pip install --no-cache-dir --timeout=300 \
     SQLAlchemy==2.0.23 \
     psycopg2-binary==2.9.9 \
@@ -41,11 +43,13 @@ RUN pip install --no-cache-dir --timeout=300 \
     Flask-Migrate==4.0.5 \
     alembic==1.12.1
 
+# Install Redis packages
 RUN pip install --no-cache-dir --timeout=300 \
     redis==5.0.1 \
     hiredis==2.2.3 \
     Flask-Caching==2.1.0
 
+# Install auth packages
 RUN pip install --no-cache-dir --timeout=300 \
     Flask-JWT-Extended==4.5.3 \
     Flask-Bcrypt==1.0.1 \
@@ -54,30 +58,38 @@ RUN pip install --no-cache-dir --timeout=300 \
     Flask-Limiter==3.5.0 \
     Flask-Compress==1.14
 
+# CRITICAL: Install NumPy 1.x FIRST before any ML packages
 RUN pip install --no-cache-dir --timeout=600 \
-    numpy==1.24.3 \
+    "numpy<2.0,>=1.24.3"
+
+# Now install packages that depend on NumPy
+RUN pip install --no-cache-dir --timeout=600 \
     Pillow==10.1.0
 
 RUN pip install --no-cache-dir --timeout=600 \
     opencv-python-headless==4.8.1.78
 
+# Install TensorFlow (compatible with NumPy 1.x)
 RUN pip install --no-cache-dir --timeout=900 \
     tensorflow==2.15.0 \
     tf-keras==2.15.0
 
+# Install face recognition packages
 RUN pip install --no-cache-dir --timeout=300 \
     deepface==0.0.79 \
     mtcnn==0.1.1
 
+# Install FAISS (requires NumPy 1.x)
 RUN pip install --no-cache-dir --timeout=300 \
     faiss-cpu==1.7.4
 
+# Install utility packages
 RUN pip install --no-cache-dir --timeout=300 \
     requests==2.31.0 \
     python-dateutil==2.8.2 \
     pytz==2023.3
 
-# Stage 2
+# Stage 2: Runtime
 FROM python:3.11-slim-bookworm
 
 # Set build arguments
@@ -134,10 +146,9 @@ ENV PATH="/opt/venv/bin:$PATH" \
     TF_CPP_MIN_LOG_LEVEL=2 \
     TF_ENABLE_ONEDNN_OPTS=0 \
     TF_USE_LEGACY_KERAS=0 \
-    # Prevent Python from writing .pyc files
-    PYTHONDONTWRITEBYTECODE=1 \
-    # Force Python to run in unbuffered mode
-    PYTHONUNBUFFERED=1
+    # NumPy compatibility
+    NPY_DISABLE_CPU_FEATURES="" \
+    OPENBLAS_NUM_THREADS=1
 
 # Expose application port
 EXPOSE 10000

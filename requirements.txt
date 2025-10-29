@@ -28,16 +28,19 @@ Flask-Limiter==3.5.0
 # Response Compression
 Flask-Compress==1.14
 
+# NumPy MUST be installed before other ML packages
+# Pin to 1.x for compatibility with faiss-cpu and tensorflow
+numpy==1.24.3
+
 # Face Recognition & ML
 deepface==0.0.79
 opencv-python-headless==4.8.1.78
 tensorflow==2.15.0
 tf-keras==2.15.0
-numpy==1.24.3
 Pillow==10.1.0
 mtcnn==0.1.1
 
-# Vector Search
+# Vector Search (requires numpy 1.x)
 faiss-cpu==1.7.4
 
 # Background Tasks (Optional)
