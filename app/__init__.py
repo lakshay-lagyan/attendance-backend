@@ -27,6 +27,11 @@ limiter = Limiter(
 def create_app(config_name='production'):
     """Application factory with optimizations"""
     
+    # Ensure valid config name
+    if config_name not in config:
+        logger.warning(f"Invalid config name '{config_name}', using 'production'")
+        config_name = 'production'
+    
     app = Flask(__name__)
     app.config.from_object(config[config_name])
     
@@ -218,7 +223,7 @@ def register_commands(app):
     @app.cli.command()
     def create_admin():
         """Create admin user"""
-        from app.models.user import Admin
+        from app.models import Admin
         from werkzeug.security import generate_password_hash
         
         email = input("Email: ")

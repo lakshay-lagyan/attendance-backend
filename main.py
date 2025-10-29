@@ -7,16 +7,22 @@ from app.utils.logger import setup_logging
 setup_logging()
 logger = logging.getLogger(__name__)
 
-app = create_app(os.getenv('FLASK_ENV', 'production'))
+# Ensure FLASK_ENV is valid - default to 'production' if not recognized
+flask_env = os.getenv('FLASK_ENV', 'production')
+if flask_env not in ['production', 'development', 'testing']:
+    logger.warning(f"Invalid FLASK_ENV '{flask_env}', defaulting to 'production'")
+    flask_env = 'production'
+
+app = create_app(flask_env)
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 10000))
-    debug = os.getenv('FLASK_ENV') == 'development'
+    debug = flask_env == 'development'
     
-    logger.info(f"   Starting Smart Attendance API")
-    logger.info(f"   Environment: {os.getenv('FLASK_ENV', 'production')}")
-    logger.info(f"   Port: {port}")
-    logger.info(f"   Debug: {debug}")
+    logger.info(f"🚀 Starting Smart Attendance API")
+    logger.info(f"📦 Environment: {flask_env}")
+    logger.info(f"🔌 Port: {port}")
+    logger.info(f"🐛 Debug: {debug}")
     
     app.run(
         host='0.0.0.0',
