@@ -25,8 +25,14 @@ ENV PATH="/opt/venv/bin:$PATH"
 # Upgrade pip and install build tools
 RUN pip install --no-cache-dir --upgrade pip==23.3.1 setuptools==69.0.2 wheel==0.42.0
 
-# Copy only requirements first (better layer caching)
-COPY requirements.txt /tmp/requirements.txt
+# Copy constraints file
+COPY constraints.txt /tmp/constraints.txt
+
+# Set pip to always use constraints
+ENV PIP_CONSTRAINT=/tmp/constraints.txt
+
+# CRITICAL: Install NumPy 1.x FIRST and lock it
+RUN pip install --no-cache-dir "numpy==1.24.3"
 
 # Install Flask ecosystem
 RUN pip install --no-cache-dir --timeout=300 \
@@ -58,30 +64,35 @@ RUN pip install --no-cache-dir --timeout=300 \
     Flask-Limiter==3.5.0 \
     Flask-Compress==1.14
 
-# CRITICAL: Install NumPy 1.x FIRST before any ML packages
-RUN pip install --no-cache-dir --timeout=600 \
-    "numpy<2.0,>=1.24.3"
+# Install image processing (with --no-deps to prevent numpy upgrade)
+RUN pip install --no-cache-dir --timeout=600 Pillow==10.1.0
 
-# Now install packages that depend on NumPy
-RUN pip install --no-cache-dir --timeout=600 \
-    Pillow==10.1.0
+# Install OpenCV (force no numpy upgrade)
+RUN pip install --no-cache-dir --timeout=600 --no-deps opencv-python-headless==4.8.1.78 && \
+    pip install --no-cache-dir opencv-python-headless==4.8.1.78
 
-RUN pip install --no-cache-dir --timeout=600 \
-    opencv-python-headless==4.8.1.78
-
-# Install TensorFlow (compatible with NumPy 1.x)
+# Install TensorFlow with numpy constraint
 RUN pip install --no-cache-dir --timeout=900 \
-    tensorflow==2.15.0 \
-    tf-keras==2.15.0
+    "tensorflow==2.15.0" \
+    "tf-keras==2.15.0"
+
+# Verify and force NumPy 1.24.3 again
+RUN pip install --no-cache-dir --force-reinstall "numpy==1.24.3"
+
+# Install FAISS (requires NumPy 1.x)
+RUN pip install --no-cache-dir --timeout=300 --no-deps faiss-cpu==1.7.4 && \
+    pip install --no-cache-dir faiss-cpu==1.7.4
 
 # Install face recognition packages
 RUN pip install --no-cache-dir --timeout=300 \
     deepface==0.0.79 \
     mtcnn==0.1.1
 
-# Install FAISS (requires NumPy 1.x)
-RUN pip install --no-cache-dir --timeout=300 \
-    faiss-cpu==1.7.4
+# FINAL: Force reinstall NumPy 1.24.3 to override any upgrades
+RUN pip install --no-cache-dir --force-reinstall --no-deps "numpy==1.24.3"
+
+# Verify NumPy version
+RUN python -c "import numpy; print(f'NumPy version: {numpy.__version__}'); assert numpy.__version__.startswith('1.24'), 'Wrong NumPy version!'"
 
 # Install utility packages
 RUN pip install --no-cache-dir --timeout=300 \
@@ -149,6 +160,9 @@ ENV PATH="/opt/venv/bin:$PATH" \
     # NumPy compatibility
     NPY_DISABLE_CPU_FEATURES="" \
     OPENBLAS_NUM_THREADS=1
+
+# Verify NumPy version at runtime
+RUN python -c "import numpy; print(f'Runtime NumPy: {numpy.__version__}')"
 
 # Expose application port
 EXPOSE 10000
