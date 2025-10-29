@@ -21,10 +21,8 @@ services:
           name: attendance-db
           property: connectionString
       - key: REDIS_URL
-        fromService:
-          type: redis
-          name: attendance-cache
-          property: connectionString
+        value: ""
+       
       - key: PORT
         value: "10000"
       - key: WORKERS
@@ -51,11 +49,4 @@ databases:
     user: attendance_user
     plan: starter
     region: oregon
-    ipAllowList: []
-    
-  # Redis Cache
-  - name: attendance-cache
-    plan: starter
-    region: oregon
-    maxmemoryPolicy: allkeys-lru
     ipAllowList: []
