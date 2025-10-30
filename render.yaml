@@ -1,5 +1,4 @@
 services:
-  # Backend API Service
   - type: web
     name: attendance-backend-api
     runtime: docker
@@ -7,11 +6,11 @@ services:
     region: oregon
     branch: main
     dockerfilePath: ./Dockerfile
+    # Database initialization 
+    preDeployCommand: python init_db.py
     envVars:
       - key: FLASK_SECRET
         generateValue: true
-      - key: FLASK_ENV
-        value: production
       - key: JWT_SECRET
         generateValue: true
       - key: DATABASE_URL
@@ -26,6 +25,7 @@ services:
         value: "2"
       - key: THREADS
         value: "4"
+      # Frontend URL - UPDATE THIS after deploying 
       - key: FRONTEND_URL
         value: "https://attendance-frontend-f94l.onrender.com"
       - key: PYTHON_VERSION
@@ -36,6 +36,8 @@ services:
         value: "0.6"
       - key: MIN_IMAGES
         value: "5"
+      - key: LOG_LEVEL
+        value: "INFO"
     healthCheckPath: /health
     autoDeploy: true
 

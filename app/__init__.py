@@ -44,7 +44,6 @@ def create_app(config_name='production'):
     compress.init_app(app)
     jwt.init_app(app)
     
-    # Configure rate limiter with Redis if available
     if app.config.get('REDIS_URL'):
         limiter.storage_uri = app.config['REDIS_URL']
     limiter.init_app(app)
@@ -156,6 +155,7 @@ def register_health_check(app):
         """Comprehensive health check"""
         from app.services.faiss_service import faiss_service
         from app.services.cache_service import cache_service
+        from sqlalchemy import text
         
         health = {
             "status": "healthy",
@@ -166,7 +166,9 @@ def register_health_check(app):
         
         # Check database
         try:
-            db.session.execute('SELECT 1')
+            with db.engine.connect() as conn:
+                conn.execute(text('SELECT 1'))
+                conn.commit()
             health["checks"]["database"] = "healthy"
         except Exception as e:
             health["checks"]["database"] = f"unhealthy: {str(e)}"
