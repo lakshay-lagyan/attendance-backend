@@ -25,7 +25,7 @@ limiter = Limiter(
 )
 
 def create_app(config_name='production'):
-    """Application factory with optimizations"""
+    """Application factory - API-only mode"""
     
     # Ensure valid config name
     if config_name not in config:
@@ -49,17 +49,16 @@ def create_app(config_name='production'):
         limiter.storage_uri = app.config['REDIS_URL']
     limiter.init_app(app)
     
-    # Configure CORS
-    CORS(app, resources={
-        r"/api/*": {
-            "origins": app.config['CORS_ORIGINS'],
-            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-            "allow_headers": ["Content-Type", "Authorization"],
-            "expose_headers": ["Content-Type", "Authorization"],
-            "supports_credentials": True,
-            "max_age": 3600
-        }
-    })
+    # Configure CORS for frontend access
+    frontend_urls = app.config.get('CORS_ORIGINS', ['https://attendance-frontend-f94l.onrender.com'])
+    CORS(app, 
+         resources={r"/api/*": {"origins": frontend_urls}},
+         supports_credentials=True,
+         allow_headers=["Content-Type", "Authorization"],
+         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+         expose_headers=["Content-Type"],
+         max_age=3600
+    )
     
     # Initialize services
     with app.app_context():
@@ -80,7 +79,7 @@ def create_app(config_name='production'):
         except Exception as e:
             logger.warning(f"⚠️  Cache service unavailable: {e}")
     
-    # Register blueprints
+    # Register blueprints (API only)
     register_blueprints(app)
     
     # Register error handlers
@@ -92,13 +91,13 @@ def create_app(config_name='production'):
     # Register CLI commands
     register_commands(app)
     
-    logger.info(f"✅ Application created: {config_name} mode")
+    logger.info(f"✅ API-only application created: {config_name} mode")
     
     return app
 
 
 def register_blueprints(app):
-    """Register application blueprints"""
+    """Register API blueprints only"""
     from app.routes import (
         auth_bp, enrollment_bp, attendance_bp, 
         admin_bp, face_bp, user_bp
@@ -111,7 +110,7 @@ def register_blueprints(app):
     app.register_blueprint(face_bp, url_prefix='/api/face')
     app.register_blueprint(user_bp, url_prefix='/api/user')
     
-    logger.info("✅ Blueprints registered")
+    logger.info("✅ API Blueprints registered")
 
 
 def register_error_handlers(app):
@@ -161,6 +160,7 @@ def register_health_check(app):
         health = {
             "status": "healthy",
             "version": "2.0.0",
+            "mode": "api-only",
             "checks": {}
         }
         
@@ -194,19 +194,23 @@ def register_health_check(app):
         return jsonify(health), status_code
     
     @app.route('/')
+    @app.route('/api')
     def index():
         """API information"""
         return jsonify({
             "service": "Smart Attendance API",
             "version": "2.0.0",
+            "mode": "api-only",
             "status": "running",
+            "documentation": "/api/docs",
+            "health": "/health",
             "endpoints": {
-                "health": "/health",
-                "docs": "/api/docs",
                 "auth": "/api/auth/*",
                 "enrollment": "/api/enrollment/*",
                 "attendance": "/api/attendance/*",
-                "face": "/api/face/*"
+                "admin": "/api/admin/*",
+                "face": "/api/face/*",
+                "user": "/api/user/*"
             }
         })
 

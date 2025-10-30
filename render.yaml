@@ -1,7 +1,7 @@
 services:
   # Backend API Service
   - type: web
-    name: attendance-api
+    name: attendance-backend-api
     runtime: docker
     plan: starter
     region: oregon
@@ -14,15 +14,12 @@ services:
         value: production
       - key: JWT_SECRET
         generateValue: true
-      - key: CREATE_ADMIN_SECRET
-        generateValue: true
       - key: DATABASE_URL
         fromDatabase:
           name: attendance-db
           property: connectionString
       - key: REDIS_URL
         value: ""
-       
       - key: PORT
         value: "10000"
       - key: WORKERS
@@ -30,7 +27,7 @@ services:
       - key: THREADS
         value: "4"
       - key: FRONTEND_URL
-        value: "https://attendance-app.onrender.com"
+        value: "https://attendance-frontend-f94l.onrender.com"
       - key: PYTHON_VERSION
         value: "3.11"
       - key: TF_CPP_MIN_LOG_LEVEL
