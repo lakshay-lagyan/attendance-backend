@@ -30,7 +30,7 @@ class FaceRecognitionService:
             logger.info("Loading face recognition models...")
             DeepFace.build_model(self.model_name)
             self._models_loaded = True
-            logger.info("✅ Models loaded")
+            logger.info("[OK] Models loaded")
         except Exception as e:
             logger.error(f"Failed to load models: {e}")
     
