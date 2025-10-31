@@ -31,7 +31,9 @@ class DevelopmentConfig:
     SESSION_TYPE = 'filesystem'
     SESSION_COOKIE_SECURE = False
     SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SAMESITE = 'Lax'
+    SESSION_COOKIE_SAMESITE = 'None'  # Required for cross-origin with credentials
+    SESSION_COOKIE_NAME = 'attendance_session'
+    SESSION_COOKIE_DOMAIN = None
     PERMANENT_SESSION_LIFETIME = timedelta(hours=24)
     
     # JWT

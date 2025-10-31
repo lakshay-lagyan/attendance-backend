@@ -39,12 +39,14 @@ class ProductionConfig:
     CACHE_DEFAULT_TIMEOUT = 3600
     CACHE_KEY_PREFIX = 'attendance:'
     
-    # Session
+    # Session - Fixed for cross-origin requests
     SESSION_TYPE = 'redis'
     SESSION_REDIS = REDIS_URL
     SESSION_COOKIE_SECURE = True
     SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SAMESITE = 'Lax'
+    SESSION_COOKIE_SAMESITE = 'None'  # Required for cross-origin with credentials
+    SESSION_COOKIE_NAME = 'attendance_session'
+    SESSION_COOKIE_DOMAIN = None  # Allow subdomains
     PERMANENT_SESSION_LIFETIME = timedelta(hours=24)
     
     # JWT
