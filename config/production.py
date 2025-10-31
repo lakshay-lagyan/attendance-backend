@@ -3,7 +3,6 @@ import os
 from datetime import timedelta
 
 class ProductionConfig:
-    """Production configuration with performance optimizations"""
     
     # Flask
     SECRET_KEY = os.getenv('FLASK_SECRET', os.urandom(32).hex())  # FIXED
@@ -58,7 +57,7 @@ class ProductionConfig:
     JWT_HEADER_TYPE = 'Bearer'
     
     # CORS
-    CORS_ORIGINS = os.getenv('FRONTEND_URL', 'https://attendance-frontend-61os.onrender.com').split(',')
+    CORS_ORIGINS = os.getenv('FRONTEND_URL', 'https://attendance-frontend-p3xd.onrender.com').split(',')
     CORS_SUPPORTS_CREDENTIALS = True
     CORS_MAX_AGE = 3600
     

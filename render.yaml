@@ -25,7 +25,7 @@ services:
       - key: THREADS
         value: "4"
       - key: FRONTEND_URL
-        value: "https://attendance-frontend-61os.onrender.com"
+        value: "https://attendance-frontend-p3xd.onrender.com"
       - key: PYTHON_VERSION
         value: "3.11"
       - key: TF_CPP_MIN_LOG_LEVEL

@@ -47,7 +47,7 @@ def create_app(config_name='production'):
     limiter.init_app(app)
     
     # Configure CORS for frontend access
-    frontend_urls = app.config.get('CORS_ORIGINS', ['https://attendance-frontend-61os.onrender.com'])
+    frontend_urls = app.config.get('CORS_ORIGINS', ['https://attendance-frontend-p3xd.onrender.com'])
     CORS(app, 
          resources={r"/api/*": {"origins": frontend_urls}},
          supports_credentials=True,
