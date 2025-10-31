@@ -1,36 +1,17 @@
+import logging
 from flask import request, jsonify
 from app import db, limiter
 from app.routes import enrollment_bp
 from app.services.advanced_enrollment import advanced_enrollment_service
-from app.utils.logger import logger
 from werkzeug.utils import secure_filename
 import os
+
+logger = logging.getLogger(__name__)
 
 @enrollment_bp.route('/enroll', methods=['POST'])
 @limiter.limit("3 per hour")
 def enroll_user():
-    """
-    Advanced enrollment with multi-image processing
     
-    Form Data:
-        - name: Person's full name (required)
-        - email: Email address (required)
-        - password: Login password (required)
-        - department: Department (optional)
-        - phone: Phone number (optional)
-        - files: Multiple image files (minimum 3, optimal 5-8)
-    
-    Returns:
-        {
-            "success": true/false,
-            "message": "...",
-            "name": "...",
-            "embedding_dim": 512,
-            "photos_used": 5,
-            "quality_scores": [...],
-            "consistency_score": 0.85
-        }
-    """
     try:
         # Validate form data
         name = request.form.get('name')
@@ -91,26 +72,7 @@ def enroll_user():
 @enrollment_bp.route('/validate-image', methods=['POST'])
 @limiter.limit("30 per minute")
 def validate_image():
-    """
-    Real-time image validation endpoint
-    Used by frontend to check image quality before upload
-    
-    Form Data:
-        - image: Single image file
-    
-    Returns:
-        {
-            "valid": true/false,
-            "quality_score": 0.75,
-            "issues": ["..."],
-            "metrics": {
-                "sharpness": 0.8,
-                "brightness": 0.7,
-                "face_detected": true,
-                "face_size": [120, 140]
-            }
-        }
-    """
+   
     try:
         if 'image' not in request.files:
             return jsonify({
@@ -229,10 +191,7 @@ def validate_image():
 @enrollment_bp.route('/request', methods=['POST'])
 @limiter.limit("5 per hour")
 def submit_request():
-    """
-    Submit enrollment request (for approval workflow)
-    This is kept for backward compatibility
-    """
+    
     return jsonify({
         "message": "Please use /api/enrollment/enroll endpoint for direct enrollment",
         "redirect": "/api/enrollment/enroll"

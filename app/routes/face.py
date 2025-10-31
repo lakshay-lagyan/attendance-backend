@@ -1,10 +1,12 @@
+import logging
 from flask import request, jsonify
 from app import db, limiter
 from app.routes import face_bp
 from app.services.face_recognition import face_recognition_service
 from app.services.crowd_recognition import crowd_recognition_service
-from app.utils.logger import logger
 import numpy as np
+
+logger = logging.getLogger(__name__)
 
 @face_bp.route('/recognize', methods=['POST'])
 @limiter.limit("30 per minute")
@@ -58,14 +60,7 @@ def recognize():
 @face_bp.route('/recognize/crowd', methods=['POST'])
 @limiter.limit("10 per minute")
 def recognize_crowd():
-    """
-    Recognize multiple faces in crowded scene
     
-    Body:
-        - image: Image file with multiple faces
-        - enable_tracking: (optional) Enable face tracking for video
-        - cooldown: (optional) Cooldown seconds between recognitions (default: 5)
-    """
     try:
         # Check if image file present
         if 'image' not in request.files:
