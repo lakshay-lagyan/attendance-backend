@@ -36,10 +36,10 @@ class CacheService:
             # Test connection
             self.client.ping()
             self.available = True
-            logger.info("✅ Redis cache connected")
+            logger.info("[OK] Redis cache connected")
             
         except Exception as e:
-            logger.warning(f"⚠️  Redis unavailable: {e}. Using memory cache.")
+            logger.warning(f"[WARNING] Redis unavailable: {e}. Using memory cache.")
             self.available = False
     
     def is_available(self) -> bool:

@@ -1,15 +1,13 @@
-# ============================================================
-# FIXED FILE: config/__init__.py
-# ============================================================
-
 from config.production import ProductionConfig
+from config.development import DevelopmentConfig
 
 config = {
     'production': ProductionConfig,
-    'default': ProductionConfig
+    'development': DevelopmentConfig,
+    'testing': DevelopmentConfig,
+    'default': DevelopmentConfig
 }
 
-__all__ = ['config', 'ProductionConfig']
+__all__ = ['config', 'ProductionConfig', 'DevelopmentConfig']
 
-
-# Change: from app.models import Person
+# from app.models import Person

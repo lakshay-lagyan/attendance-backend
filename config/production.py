@@ -11,7 +11,7 @@ class ProductionConfig:
     TESTING = False
     
     # Database - Optimized connection pooling
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql://localhost/mydb')
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql://bazidajattan@localhost:5432/mydb')
     if SQLALCHEMY_DATABASE_URI.startswith('postgres://'):
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('postgres://', 'postgresql://', 1)
     
@@ -58,7 +58,7 @@ class ProductionConfig:
     JWT_HEADER_TYPE = 'Bearer'
     
     # CORS
-    CORS_ORIGINS = os.getenv('FRONTEND_URL', 'https://localhost:3000').split(',')
+    CORS_ORIGINS = os.getenv('FRONTEND_URL', 'https://attendance-frontend-61os.onrender.com').split(',')
     CORS_SUPPORTS_CREDENTIALS = True
     CORS_MAX_AGE = 3600
     

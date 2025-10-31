@@ -6,6 +6,15 @@ import os
 def setup_logging():
     """Setup application logging"""
     
+    # Fix Windows console encoding for emoji support
+    if sys.platform == 'win32':
+        try:
+            sys.stdout.reconfigure(encoding='utf-8')
+        except AttributeError:
+            # Python < 3.7
+            import codecs
+            sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+    
     # Get log level from environment
     log_level = os.getenv('LOG_LEVEL', 'INFO')
     
@@ -22,7 +31,7 @@ def setup_logging():
     # Clear existing handlers
     root_logger.handlers = []
     
-    # Console handler
+    # Console handler with UTF-8 encoding
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setLevel(getattr(logging, log_level))
     console_handler.setFormatter(formatter)
@@ -47,5 +56,5 @@ def setup_logging():
     logging.getLogger('urllib3').setLevel(logging.WARNING)
     logging.getLogger('tensorflow').setLevel(logging.ERROR)
     
-    root_logger.info("✅ Logging initialized")
+    root_logger.info("[OK] Logging initialized")
 

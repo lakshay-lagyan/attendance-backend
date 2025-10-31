@@ -36,19 +36,19 @@ class FAISSService:
             
             # Try loading from cache first
             if self._load_from_cache():
-                logger.info("✅ FAISS index loaded from cache")
+                logger.info("[OK] FAISS index loaded from cache")
                 self.initialized = True
                 return
             
             # Fallback to database
             if self._rebuild_from_database():
-                logger.info("✅ FAISS index built from database")
+                logger.info("[OK] FAISS index built from database")
                 self.initialized = True
                 return
             
             # Create empty index
             self._create_empty_index()
-            logger.info("✅ FAISS empty index created")
+            logger.info("[OK] FAISS empty index created")
             self.initialized = True
     
     def _create_empty_index(self):
@@ -158,7 +158,7 @@ class FAISSService:
             self._save_to_cache()
             
             self.rebuild_counter += 1
-            logger.info(f"✅ FAISS index rebuilt: {len(self.person_map)} persons")
+            logger.info(f"[OK] FAISS index rebuilt: {len(self.person_map)} persons")
             
             return True
             

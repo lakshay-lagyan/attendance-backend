@@ -25,7 +25,6 @@ limiter = Limiter(
 )
 
 def create_app(config_name='production'):
-    """Application factory - API-only mode"""
     
     # Ensure valid config name
     if config_name not in config:
@@ -35,7 +34,6 @@ def create_app(config_name='production'):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
     
-    # Trust proxy headers (for Render)
     app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
     
     # Initialize extensions
@@ -49,7 +47,7 @@ def create_app(config_name='production'):
     limiter.init_app(app)
     
     # Configure CORS for frontend access
-    frontend_urls = app.config.get('CORS_ORIGINS', ['https://attendance-frontend-f94l.onrender.com'])
+    frontend_urls = app.config.get('CORS_ORIGINS', ['https://attendance-frontend-61os.onrender.com'])
     CORS(app, 
          resources={r"/api/*": {"origins": frontend_urls}},
          supports_credentials=True,
@@ -67,16 +65,16 @@ def create_app(config_name='production'):
         # Initialize FAISS index
         try:
             faiss_service.initialize()
-            logger.info("✅ FAISS service initialized")
+            logger.info("[OK] FAISS service initialized")
         except Exception as e:
-            logger.error(f"❌ FAISS initialization failed: {e}")
+            logger.error(f"[ERROR] FAISS initialization failed: {e}")
         
         # Initialize cache
         try:
             cache_service.initialize(app.config.get('REDIS_URL'))
-            logger.info("✅ Cache service initialized")
+            logger.info("[OK] Cache service initialized")
         except Exception as e:
-            logger.warning(f"⚠️  Cache service unavailable: {e}")
+            logger.warning(f"[WARNING] Cache service unavailable: {e}")
     
     # Register blueprints (API only)
     register_blueprints(app)
@@ -90,7 +88,7 @@ def create_app(config_name='production'):
     # Register CLI commands
     register_commands(app)
     
-    logger.info(f"✅ API-only application created: {config_name} mode")
+    logger.info(f"[OK] API-only application created: {config_name} mode")
     
     return app
 
@@ -109,7 +107,7 @@ def register_blueprints(app):
     app.register_blueprint(face_bp, url_prefix='/api/face')
     app.register_blueprint(user_bp, url_prefix='/api/user')
     
-    logger.info("✅ API Blueprints registered")
+    logger.info("[OK] API Blueprints registered")
 
 
 def register_error_handlers(app):
@@ -206,6 +204,7 @@ def register_health_check(app):
             "status": "running",
             "documentation": "/api/docs",
             "health": "/health",
+            "init_db": "/init-db",
             "endpoints": {
                 "auth": "/api/auth/*",
                 "enrollment": "/api/enrollment/*",
@@ -215,6 +214,63 @@ def register_health_check(app):
                 "user": "/api/user/*"
             }
         })
+    
+    @app.route('/init-db')
+    def init_database_endpoint():
+        """Initialize database tables (call once)"""
+        from sqlalchemy import inspect
+        from app.models import Admin
+        from werkzeug.security import generate_password_hash
+        
+        try:
+            # Check if already initialized
+            inspector = inspect(db.engine)
+            existing_tables = inspector.get_table_names()
+            
+            result = {
+                "status": "success",
+                "message": "Database initialization",
+                "tables": []
+            }
+            
+            if not existing_tables:
+                # Create all tables
+                db.create_all()
+                
+                # Verify creation
+                inspector = inspect(db.engine)
+                tables = inspector.get_table_names()
+                result["tables"] = tables
+                result["message"] = f"Created {len(tables)} tables"
+                
+                # Create default admin
+                if Admin.query.count() == 0:
+                    admin = Admin(
+                        name="Admin",
+                        email="admin@admin.com",
+                        password_hash=generate_password_hash("password123")
+                    )
+                    db.session.add(admin)
+                    db.session.commit()
+                    
+                    result["admin"] = {
+                        "email": "admin@admin.com",
+                        "password": "password123",
+                        "warning": "CHANGE THIS PASSWORD IMMEDIATELY!"
+                    }
+            else:
+                result["tables"] = existing_tables
+                result["message"] = f"Database already initialized with {len(existing_tables)} tables"
+                result["admin_count"] = Admin.query.count()
+            
+            return jsonify(result), 200
+            
+        except Exception as e:
+            logger.error(f"Database initialization failed: {e}")
+            return jsonify({
+                "status": "error",
+                "message": str(e)
+            }), 500
 
 
 def register_commands(app):
@@ -224,7 +280,7 @@ def register_commands(app):
     def init_db():
         """Initialize database"""
         db.create_all()
-        print("✅ Database initialized")
+        print("[OK] Database initialized")
     
     @app.cli.command()
     def create_admin():
@@ -243,11 +299,11 @@ def register_commands(app):
         )
         db.session.add(admin)
         db.session.commit()
-        print(f"✅ Admin created: {email}")
+        print(f"[OK] Admin created: {email}")
     
     @app.cli.command()
     def rebuild_faiss():
         """Rebuild FAISS index"""
         from app.services.faiss_service import faiss_service
         faiss_service.rebuild_from_database()
-        print("✅ FAISS index rebuilt")
+        print("[OK] FAISS index rebuilt")
