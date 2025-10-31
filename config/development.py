@@ -27,8 +27,8 @@ class DevelopmentConfig:
     CACHE_DEFAULT_TIMEOUT = 300
     CACHE_KEY_PREFIX = 'attendance:'
     
-    # Session
-    SESSION_TYPE = 'filesystem'
+    # Session (using Flask built-in session)
+    # SESSION_TYPE = 'filesystem'  # Temporarily disabled - using Flask default
     SESSION_COOKIE_SECURE = False
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = 'None'  # Required for cross-origin with credentials

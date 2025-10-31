@@ -7,7 +7,7 @@ from flask_limiter.util import get_remote_address
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
-from flask_session import Session
+# from flask_session import Session  # Temporarily commented - will add after testing
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from config import config
@@ -19,7 +19,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 compress = Compress()
 jwt = JWTManager()
-sess = Session()
+# sess = Session()  # Temporarily commented - using Flask's built-in session
 limiter = Limiter(
     key_func=get_remote_address,
     default_limits=["200 per hour"],
@@ -43,7 +43,7 @@ def create_app(config_name='production'):
     migrate.init_app(app, db)
     compress.init_app(app)
     jwt.init_app(app)
-    sess.init_app(app)  # Initialize Flask-Session for Redis-backed sessions
+    # sess.init_app(app)  # Temporarily commented - using Flask's built-in session
     
     if app.config.get('REDIS_URL'):
         limiter.storage_uri = app.config['REDIS_URL']

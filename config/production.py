@@ -39,9 +39,9 @@ class ProductionConfig:
     CACHE_DEFAULT_TIMEOUT = 3600
     CACHE_KEY_PREFIX = 'attendance:'
     
-    # Session - Fixed for cross-origin requests
-    SESSION_TYPE = 'redis'
-    SESSION_REDIS = REDIS_URL
+    # Session - Fixed for cross-origin requests (using Flask built-in session)
+    # SESSION_TYPE = 'redis'  # Temporarily disabled - using Flask default
+    # SESSION_REDIS = REDIS_URL
     SESSION_COOKIE_SECURE = True
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = 'None'  # Required for cross-origin with credentials
