@@ -61,11 +61,23 @@ def enroll_user():
         else:
             return jsonify(result), 400
             
+    except MemoryError as e:
+        logger.error(f"Out of memory during enrollment: {e}")
+        return jsonify({
+            "success": False,
+            "message": "Server out of memory. Please try with fewer or smaller images."
+        }), 507
+    except TimeoutError as e:
+        logger.error(f"Enrollment timeout: {e}")
+        return jsonify({
+            "success": False,
+            "message": "Processing timeout. Please try with fewer images."
+        }), 408
     except Exception as e:
         logger.error(f"Enrollment endpoint error: {e}", exc_info=True)
         return jsonify({
             "success": False,
-            "message": f"Enrollment failed: {str(e)}"
+            "message": f"Enrollment failed: {str(e)}. Check server logs for details."
         }), 500
 
 
