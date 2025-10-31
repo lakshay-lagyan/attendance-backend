@@ -1,5 +1,5 @@
-from config.production import ProductionConfig
-from config.development import DevelopmentConfig
+from .production import ProductionConfig
+from .development import DevelopmentConfig
 
 config = {
     'production': ProductionConfig,
