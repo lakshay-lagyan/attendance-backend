@@ -17,7 +17,7 @@ services:
           name: attendance-db
           property: connectionString
       - key: REDIS_URL
-        value: ""
+        value: "redis://red-d427ukeuk2gs73bc97t0:6379"
       - key: PORT
         value: "10000"
       - key: WORKERS

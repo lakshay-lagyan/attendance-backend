@@ -33,7 +33,7 @@ class ProductionConfig:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = False
     
     # Redis Cache
-    REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
+    REDIS_URL = os.getenv('REDIS_URL', 'redis://red-d427ukeuk2gs73bc97t0:6379')
     CACHE_TYPE = 'redis'
     CACHE_REDIS_URL = REDIS_URL
     CACHE_DEFAULT_TIMEOUT = 3600
