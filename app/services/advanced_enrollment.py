@@ -1,7 +1,3 @@
-"""
-Advanced Enrollment Service
-Handles multi-image enrollment with quality validation and best embedding selection
-"""
 import logging
 import pickle
 import numpy as np
