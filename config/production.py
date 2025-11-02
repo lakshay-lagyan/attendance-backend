@@ -10,7 +10,7 @@ class ProductionConfig:
     TESTING = False
     
     # Database - Optimized connection pooling
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql://bazidajattan@localhost:5432/mydb')
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     if SQLALCHEMY_DATABASE_URI.startswith('postgres://'):
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('postgres://', 'postgresql://', 1)
     
