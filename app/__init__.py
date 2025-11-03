@@ -51,6 +51,16 @@ def create_app(config_name='production'):
     
     # Configure CORS for frontend access
     frontend_urls = app.config.get('CORS_ORIGINS', ['https://attendance-frontend-p3xd.onrender.com'])
+    
+    # Add localhost for development (REMOVE IN PRODUCTION!)
+    if app.config.get('DEBUG') or config_name == 'development':
+        frontend_urls.extend([
+            'http://localhost:5500',
+            'http://127.0.0.1:5500',
+            'http://localhost:3000',
+            'http://127.0.0.1:3000'
+        ])
+    
     CORS(app, 
          resources={r"/api/*": {"origins": frontend_urls}},
          supports_credentials=True,
