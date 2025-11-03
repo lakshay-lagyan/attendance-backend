@@ -62,6 +62,7 @@ class ProductionConfig:
     CORS_ORIGINS = os.getenv('FRONTEND_URL', 'https://attendance-frontend-p3xd.onrender.com').split(',')
     CORS_SUPPORTS_CREDENTIALS = True
     CORS_MAX_AGE = 3600
+    ALLOW_LOCAL_CORS = os.getenv('ALLOW_LOCAL_CORS', 'true').lower() == 'true'  # Allow localhost for testing
     
     # Rate Limiting
     RATELIMIT_STORAGE_URL = REDIS_URL

@@ -9,7 +9,7 @@ class DevelopmentConfig:
     TESTING = False
     
     # Database - Use SQLite for local development
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///attendance_dev.db')
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     if SQLALCHEMY_DATABASE_URI.startswith('postgres://'):
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('postgres://', 'postgresql://', 1)
     

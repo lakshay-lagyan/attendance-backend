@@ -52,21 +52,33 @@ def create_app(config_name='production'):
     # Configure CORS for frontend access
     frontend_urls = app.config.get('CORS_ORIGINS', ['https://attendance-frontend-p3xd.onrender.com'])
     
-    # Add localhost for development (REMOVE IN PRODUCTION!)
-    if app.config.get('DEBUG') or config_name == 'development':
-        frontend_urls.extend([
-            'http://localhost:5500',
-            'http://127.0.0.1:5500',
-            'http://localhost:3000',
-            'http://127.0.0.1:3000'
-        ])
+    # Add common localhost ports for development/testing
+    # IMPORTANT: For testing only - tighten this in production!
+    local_origins = [
+        'http://localhost:5500',
+        'http://127.0.0.1:5500',
+        'http://localhost:3000',
+        'http://127.0.0.1:3000',
+        'http://localhost:8000',
+        'http://127.0.0.1:8000',
+        'http://localhost:8080',
+        'http://127.0.0.1:8080',
+        'http://localhost:5000',
+        'http://127.0.0.1:5000',
+        'null'  # For file:// protocol during testing
+    ]
+    
+    # Always add localhost for testing (can be controlled via env var)
+    allow_local = app.config.get('ALLOW_LOCAL_CORS', True)
+    if allow_local:
+        frontend_urls.extend(local_origins)
     
     CORS(app, 
-         resources={r"/api/*": {"origins": frontend_urls}},
+         resources={r"/*": {"origins": frontend_urls if frontend_urls else "*"}},
          supports_credentials=True,
-         allow_headers=["Content-Type", "Authorization"],
+         allow_headers=["Content-Type", "Authorization", "X-Requested-With"],
          methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-         expose_headers=["Content-Type"],
+         expose_headers=["Content-Type", "Authorization"],
          max_age=3600
     )
     
