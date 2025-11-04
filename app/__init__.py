@@ -46,81 +46,85 @@ def create_app(config_name='production'):
         limiter.storage_uri = app.config['REDIS_URL']
     limiter.init_app(app)
     
-    # ===== CRITICAL: CORS CONFIGURATION =====
-    # Configure CORS for frontend access
-    # Get configured origins from config
-    cors_origins = app.config.get('CORS_ORIGINS', [])
+    # ===== SIMPLIFIED CORS CONFIGURATION =====
+    # More permissive CORS for development and production
     
-    # Ensure we have a list
-    if isinstance(cors_origins, str):
-        cors_origins = [cors_origins]
+    from flask import request, make_response
     
-    # Default frontend URLs if none configured
-    if not cors_origins:
-        cors_origins = ['https://attendance-frontend-p3xd.onrender.com']
+    # For development: Allow all localhost origins
+    # For production: Allow specific domains
+    allow_all_local = app.config.get('ALLOW_LOCAL_CORS', True)  # Default true for easier development
     
-    # Add localhost for development testing
-    # Check both DEBUG mode and ALLOW_LOCAL_CORS config flag
-    allow_local = app.config.get('ALLOW_LOCAL_CORS', False) or app.debug or config_name == 'development'
-    if allow_local:
-        localhost_origins = [
-            'http://localhost:5500',
-            'http://127.0.0.1:5500',
-            'http://localhost:3000',
-            'http://127.0.0.1:3000',
-            'http://localhost:8080',
-            'http://127.0.0.1:8080'
-        ]
-        # Add only if not already present
-        for origin in localhost_origins:
-            if origin not in cors_origins:
-                cors_origins.append(origin)
-        logger.info("Localhost CORS enabled for development/testing")
+    # Get production origins
+    production_origins = app.config.get('CORS_ORIGINS', [])
+    if isinstance(production_origins, str):
+        production_origins = [production_origins]
     
-    logger.info(f"CORS enabled for origins: {cors_origins}")
+    if not production_origins:
+        production_origins = ['https://attendance-frontend-p3xd.onrender.com']
     
-    # Apply CORS with explicit configuration
-    CORS(app, 
-         resources={
-             r"/api/*": {
-                 "origins": cors_origins,
-                 "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-                 "allow_headers": ["Content-Type", "Authorization", "X-Requested-With", "Accept", "Origin"],
-                 "expose_headers": ["Content-Type", "Authorization"],
-                 "supports_credentials": True,
-                 "max_age": 3600
-             }
-         },
-         supports_credentials=True
-    )
+    # Build allowed origins list
+    allowed_origins = set(production_origins)
     
-    # Add CORS headers to all responses (belt and suspenders approach)
+    # Add common localhost patterns
+    if allow_all_local:
+        # Add specific ports
+        for port in [5500, 3000, 8080, 8000, 5000, 11988]:
+            allowed_origins.add(f'http://localhost:{port}')
+            allowed_origins.add(f'http://127.0.0.1:{port}')
+        logger.info("[CORS] Localhost origins enabled for all ports")
+    
+    allowed_origins_list = list(allowed_origins)
+    logger.info(f"[CORS] Configured origins: {allowed_origins_list}")
+    
+    # Simple CORS middleware
     @app.after_request
-    def after_request(response):
+    def add_cors_headers(response):
         origin = request.headers.get('Origin')
-        if origin in cors_origins:
+        
+        # Check if origin is allowed
+        is_allowed = False
+        if origin:
+            # Exact match
+            if origin in allowed_origins_list:
+                is_allowed = True
+            # Pattern match for localhost with any port
+            elif allow_all_local and (origin.startswith('http://localhost:') or origin.startswith('http://127.0.0.1:')):
+                is_allowed = True
+        
+        if is_allowed:
             response.headers['Access-Control-Allow-Origin'] = origin
             response.headers['Access-Control-Allow-Credentials'] = 'true'
             response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
             response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With, Accept, Origin'
             response.headers['Access-Control-Expose-Headers'] = 'Content-Type, Authorization'
+            response.headers['Access-Control-Max-Age'] = '3600'
+        
         return response
     
-    # Handle OPTIONS requests explicitly
+    # Handle preflight OPTIONS requests
     @app.before_request
-    def handle_preflight():
-        from flask import request
-        if request.method == "OPTIONS":
-            response = app.make_default_options_response()
+    def handle_options():
+        if request.method == 'OPTIONS':
             origin = request.headers.get('Origin')
-            if origin in cors_origins:
+            is_allowed = False
+            
+            if origin:
+                if origin in allowed_origins_list:
+                    is_allowed = True
+                elif allow_all_local and (origin.startswith('http://localhost:') or origin.startswith('http://127.0.0.1:')):
+                    is_allowed = True
+            
+            if is_allowed:
+                response = make_response('', 204)
                 response.headers['Access-Control-Allow-Origin'] = origin
                 response.headers['Access-Control-Allow-Credentials'] = 'true'
                 response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
                 response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With, Accept, Origin'
-            return response
+                response.headers['Access-Control-Max-Age'] = '3600'
+                return response
     
-    logger.info(f"[OK] CORS configured for origins: {cors_origins}")
+    logger.info("[OK] CORS middleware configured")
     
     # Initialize services
     with app.app_context():
