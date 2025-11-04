@@ -1,0 +1,547 @@
+2025-10-31 05:12:23 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:12:24 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:12:25 - app.services.faiss_service - ERROR - Failed to rebuild from database: (psycopg2.OperationalError) could not translate host name "dpg-d40vft1r0fns739qm4p0-a" to address: Name or service not known
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-10-31 05:15:07 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:15:07 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:15:08 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:15:08 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:15:08 - sqlalchemy.engine.Engine - INFO - [generated in 0.00840s] ('active',)
+2025-10-31 05:15:08 - app.services.faiss_service - ERROR - Failed to rebuild from database: (sqlite3.OperationalError) no such table: persons
+[SQL: SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?]
+[parameters: ('active',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-10-31 05:15:12 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:15:17 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:15:17 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:15:17 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:15:17 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:15:17 - sqlalchemy.engine.Engine - INFO - [generated in 0.00995s] ('active',)
+2025-10-31 05:15:18 - app.services.faiss_service - ERROR - Failed to rebuild from database: (sqlite3.OperationalError) no such table: persons
+[SQL: SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?]
+[parameters: ('active',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-10-31 05:15:22 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:15:22 - werkzeug - WARNING -  * Debugger is active!
+2025-10-31 05:15:41 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:15:41 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:15:41 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:15:41 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:15:41 - sqlalchemy.engine.Engine - INFO - [generated in 0.00590s] ('active',)
+2025-10-31 05:15:41 - app.services.faiss_service - ERROR - Failed to rebuild from database: (sqlite3.OperationalError) no such table: persons
+[SQL: SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?]
+[parameters: ('active',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-10-31 05:15:45 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:15:45 - __main__ - INFO - Starting Smart Attendance API
+2025-10-31 05:15:45 - __main__ - INFO - Environment: development
+2025-10-31 05:15:45 - __main__ - INFO - Port: 10000
+2025-10-31 05:15:45 - __main__ - INFO - Debug: True
+2025-10-31 05:15:45 - werkzeug - WARNING -  * Debugger is active!
+2025-10-31 05:16:06 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:16:07 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:16:07 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:16:07 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:16:07 - sqlalchemy.engine.Engine - INFO - [generated in 0.01707s] ('active',)
+2025-10-31 05:16:07 - app.services.faiss_service - ERROR - Failed to rebuild from database: (sqlite3.OperationalError) no such table: persons
+[SQL: SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?]
+[parameters: ('active',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-10-31 05:16:07 - app - INFO - [OK] FAISS service initialized
+2025-10-31 05:16:11 - app - INFO - [OK] Cache service initialized
+2025-10-31 05:16:11 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:16:11 - app - INFO - [OK] API Blueprints registered
+2025-10-31 05:16:11 - app - INFO - [OK] API-only application created: development mode
+2025-10-31 05:16:11 - __main__ - INFO - Starting Smart Attendance API
+2025-10-31 05:16:11 - __main__ - INFO - Environment: development
+2025-10-31 05:16:11 - __main__ - INFO - Port: 10000
+2025-10-31 05:16:11 - __main__ - INFO - Debug: True
+2025-10-31 05:16:11 - werkzeug - WARNING -  * Debugger is active!
+2025-10-31 05:16:39 - root - INFO - [OK] Logging initialized
+2025-10-31 05:16:40 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:16:40 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:16:40 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:16:40 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:16:40 - sqlalchemy.engine.Engine - INFO - [generated in 0.00768s] ('active',)
+2025-10-31 05:16:40 - app.services.faiss_service - ERROR - Failed to rebuild from database: (sqlite3.OperationalError) no such table: persons
+[SQL: SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?]
+[parameters: ('active',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-10-31 05:16:40 - app.services.faiss_service - INFO - [OK] FAISS empty index created
+2025-10-31 05:16:40 - app - INFO - [OK] FAISS service initialized
+2025-10-31 05:16:45 - app - INFO - [OK] Cache service initialized
+2025-10-31 05:16:45 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:16:45 - app - INFO - [OK] API Blueprints registered
+2025-10-31 05:16:45 - app - INFO - [OK] API-only application created: development mode
+2025-10-31 05:16:45 - __main__ - INFO - Starting Smart Attendance API
+2025-10-31 05:16:45 - __main__ - INFO - Environment: development
+2025-10-31 05:16:45 - __main__ - INFO - Port: 10000
+2025-10-31 05:16:45 - __main__ - INFO - Debug: True
+2025-10-31 05:16:45 - werkzeug - WARNING -  * Debugger is active!
+2025-10-31 05:17:33 - root - INFO - [OK] Logging initialized
+2025-10-31 05:17:33 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:17:33 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:17:33 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:17:33 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:17:33 - sqlalchemy.engine.Engine - INFO - [generated in 0.00705s] ('active',)
+2025-10-31 05:17:33 - app.services.faiss_service - ERROR - Failed to rebuild from database: (sqlite3.OperationalError) no such table: persons
+[SQL: SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?]
+[parameters: ('active',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-10-31 05:17:33 - app.services.faiss_service - INFO - [OK] FAISS empty index created
+2025-10-31 05:17:33 - app - INFO - [OK] FAISS service initialized
+2025-10-31 05:17:37 - app.services.cache_service - WARNING - [WARNING] Redis unavailable: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Using memory cache.
+2025-10-31 05:17:37 - app - INFO - [OK] Cache service initialized
+2025-10-31 05:17:37 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:17:37 - app - INFO - [OK] API Blueprints registered
+2025-10-31 05:17:37 - app - INFO - [OK] API-only application created: development mode
+2025-10-31 05:17:37 - __main__ - INFO - Starting Smart Attendance API
+2025-10-31 05:17:37 - __main__ - INFO - Environment: development
+2025-10-31 05:17:37 - __main__ - INFO - Port: 10000
+2025-10-31 05:17:37 - __main__ - INFO - Debug: True
+2025-10-31 05:17:38 - werkzeug - WARNING -  * Debugger is active!
+2025-10-31 05:17:46 - root - INFO - [OK] Logging initialized
+2025-10-31 05:17:47 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:17:47 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:17:47 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:17:48 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:17:48 - sqlalchemy.engine.Engine - INFO - [generated in 0.11690s] ('active',)
+2025-10-31 05:17:48 - app.services.faiss_service - ERROR - Failed to rebuild from database: (sqlite3.OperationalError) no such table: persons
+[SQL: SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?]
+[parameters: ('active',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-10-31 05:17:48 - app.services.faiss_service - INFO - [OK] FAISS empty index created
+2025-10-31 05:17:48 - app - INFO - [OK] FAISS service initialized
+2025-10-31 05:17:52 - app.services.cache_service - WARNING - [WARNING] Redis unavailable: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Using memory cache.
+2025-10-31 05:17:52 - app - INFO - [OK] Cache service initialized
+2025-10-31 05:17:52 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:17:52 - app - INFO - [OK] API Blueprints registered
+2025-10-31 05:17:52 - app - INFO - [OK] API-only application created: development mode
+2025-10-31 05:17:52 - __main__ - INFO - Starting Smart Attendance API
+2025-10-31 05:17:52 - __main__ - INFO - Environment: development
+2025-10-31 05:17:52 - __main__ - INFO - Port: 10000
+2025-10-31 05:17:52 - __main__ - INFO - Debug: True
+2025-10-31 05:17:53 - werkzeug - WARNING -  * Debugger is active!
+2025-10-31 05:18:10 - root - INFO - [OK] Logging initialized
+2025-10-31 05:18:11 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:18:11 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:18:11 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:18:11 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:18:11 - sqlalchemy.engine.Engine - INFO - [generated in 0.01361s] ('active',)
+2025-10-31 05:18:11 - app.services.faiss_service - ERROR - Failed to rebuild from database: (sqlite3.OperationalError) no such table: persons
+[SQL: SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?]
+[parameters: ('active',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-10-31 05:18:11 - app.services.faiss_service - INFO - [OK] FAISS empty index created
+2025-10-31 05:18:11 - app - INFO - [OK] FAISS service initialized
+2025-10-31 05:18:15 - app.services.cache_service - WARNING - [WARNING] Redis unavailable: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Using memory cache.
+2025-10-31 05:18:15 - app - INFO - [OK] Cache service initialized
+2025-10-31 05:18:15 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:18:15 - app - INFO - [OK] API Blueprints registered
+2025-10-31 05:18:15 - app - INFO - [OK] API-only application created: development mode
+2025-10-31 05:18:15 - __main__ - INFO - Starting Smart Attendance API
+2025-10-31 05:18:15 - __main__ - INFO - Environment: development
+2025-10-31 05:18:15 - __main__ - INFO - Port: 10000
+2025-10-31 05:18:15 - __main__ - INFO - Debug: True
+2025-10-31 05:18:20 - root - INFO - [OK] Logging initialized
+2025-10-31 05:18:21 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:18:21 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:18:21 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:18:21 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:18:21 - sqlalchemy.engine.Engine - INFO - [generated in 0.00636s] ('active',)
+2025-10-31 05:18:21 - app.services.faiss_service - ERROR - Failed to rebuild from database: (sqlite3.OperationalError) no such table: persons
+[SQL: SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?]
+[parameters: ('active',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-10-31 05:18:21 - app.services.faiss_service - INFO - [OK] FAISS empty index created
+2025-10-31 05:18:21 - app - INFO - [OK] FAISS service initialized
+2025-10-31 05:18:25 - app.services.cache_service - WARNING - [WARNING] Redis unavailable: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Using memory cache.
+2025-10-31 05:18:25 - app - INFO - [OK] Cache service initialized
+2025-10-31 05:18:25 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:18:25 - app - INFO - [OK] API Blueprints registered
+2025-10-31 05:18:25 - app - INFO - [OK] API-only application created: development mode
+2025-10-31 05:18:25 - __main__ - INFO - Starting Smart Attendance API
+2025-10-31 05:18:25 - __main__ - INFO - Environment: development
+2025-10-31 05:18:25 - __main__ - INFO - Port: 10000
+2025-10-31 05:18:25 - __main__ - INFO - Debug: True
+2025-10-31 05:18:25 - werkzeug - WARNING -  * Debugger is active!
+2025-10-31 05:18:50 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:18:50 - sqlalchemy.engine.Engine - INFO - SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite~_%' ESCAPE '~' ORDER BY name
+2025-10-31 05:18:50 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-10-31 05:18:50 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:18:50 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:18:50 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("admins")
+2025-10-31 05:18:50 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-10-31 05:18:50 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("admins")
+2025-10-31 05:18:50 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-10-31 05:18:50 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("users")
+2025-10-31 05:18:50 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-10-31 05:18:50 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("users")
+2025-10-31 05:18:50 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("persons")
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("persons")
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("profiles")
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("profiles")
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("enrollment_requests")
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("enrollment_requests")
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("attendance")
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("attendance")
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE admins (
+	id INTEGER NOT NULL, 
+	name VARCHAR(100) NOT NULL, 
+	email VARCHAR(120) NOT NULL, 
+	password_hash VARCHAR(255) NOT NULL, 
+	profile_image TEXT, 
+	created_at DATETIME, 
+	PRIMARY KEY (id)
+)
+
+
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.00772s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - CREATE UNIQUE INDEX ix_admins_email ON admins (email)
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.00810s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE users (
+	id INTEGER NOT NULL, 
+	name VARCHAR(100) NOT NULL, 
+	email VARCHAR(120) NOT NULL, 
+	password_hash VARCHAR(255) NOT NULL, 
+	department VARCHAR(100), 
+	phone VARCHAR(20), 
+	profile_image TEXT, 
+	status VARCHAR(20), 
+	created_at DATETIME, 
+	PRIMARY KEY (id)
+)
+
+
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.01749s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - CREATE INDEX idx_users_status ON users (status)
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.01007s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - CREATE UNIQUE INDEX ix_users_email ON users (email)
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.00691s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE persons (
+	id INTEGER NOT NULL, 
+	name VARCHAR(100) NOT NULL, 
+	embedding BLOB NOT NULL, 
+	embedding_dim INTEGER NOT NULL, 
+	photos_count INTEGER, 
+	status VARCHAR(20), 
+	enrollment_date DATETIME, 
+	PRIMARY KEY (id)
+)
+
+
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.01341s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_persons_name ON persons (name)
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.00363s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - CREATE INDEX idx_persons_status ON persons (status)
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.00457s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE profiles (
+	id INTEGER NOT NULL, 
+	name VARCHAR(100) NOT NULL, 
+	department VARCHAR(100), 
+	email VARCHAR(120) NOT NULL, 
+	phone VARCHAR(20), 
+	profile_image TEXT, 
+	registered_at DATETIME, 
+	PRIMARY KEY (id)
+)
+
+
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.03324s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_profiles_email ON profiles (email)
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.00653s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE enrollment_requests (
+	id INTEGER NOT NULL, 
+	name VARCHAR(100) NOT NULL, 
+	email VARCHAR(120) NOT NULL, 
+	phone VARCHAR(20), 
+	password_hash VARCHAR(255) NOT NULL, 
+	images JSON NOT NULL, 
+	status VARCHAR(20), 
+	submitted_at DATETIME, 
+	processed_at DATETIME, 
+	processed_by VARCHAR(120), 
+	rejection_reason TEXT, 
+	PRIMARY KEY (id)
+)
+
+
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.02010s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - CREATE INDEX idx_enrollment_status ON enrollment_requests (status)
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.01025s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_enrollment_requests_email ON enrollment_requests (email)
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.00320s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE attendance (
+	id INTEGER NOT NULL, 
+	name VARCHAR(100) NOT NULL, 
+	timestamp DATETIME, 
+	confidence FLOAT, 
+	PRIMARY KEY (id)
+)
+
+
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.00779s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_attendance_name ON attendance (name)
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.00734s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_attendance_timestamp ON attendance (timestamp)
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.00325s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - CREATE INDEX idx_attendance_name_timestamp ON attendance (name, timestamp DESC)
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [no key 0.00988s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite~_%' ESCAPE '~' ORDER BY name
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM (SELECT admins.id AS admins_id, admins.name AS admins_name, admins.email AS admins_email, admins.password_hash AS admins_password_hash, admins.profile_image AS admins_profile_image, admins.created_at AS admins_created_at 
+FROM admins) AS anon_1
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00778s] ()
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - INSERT INTO admins (name, email, password_hash, profile_image, created_at) VALUES (?, ?, ?, ?, ?)
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00371s] ('Admin', 'admin@admin.com', 'scrypt:32768:8:1$3MfPmV1N9JC5qsHv$a02a99d46207b3400b938a2e1c79661fcba5481d9999b26ede0327b3181504158fada1151a47ddf36a2cc5c79ff70170aeeb1258d93e65fdc989beaaf9670e54', '', '2025-10-30 23:48:51.922695')
+2025-10-31 05:18:51 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-31 05:18:59 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:18:59 - sqlalchemy.engine.Engine - INFO - SELECT 1
+2025-10-31 05:18:59 - sqlalchemy.engine.Engine - INFO - [generated in 0.01065s] ()
+2025-10-31 05:18:59 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-31 05:20:28 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:20:28 - sqlalchemy.engine.Engine - INFO - SELECT 1
+2025-10-31 05:20:28 - sqlalchemy.engine.Engine - INFO - [cached since 88.86s ago] ()
+2025-10-31 05:20:28 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-31 05:20:32 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:20:32 - sqlalchemy.engine.Engine - INFO - SELECT admins.id AS admins_id, admins.name AS admins_name, admins.email AS admins_email, admins.password_hash AS admins_password_hash, admins.profile_image AS admins_profile_image, admins.created_at AS admins_created_at 
+FROM admins 
+WHERE admins.email = ?
+ LIMIT ? OFFSET ?
+2025-10-31 05:20:32 - sqlalchemy.engine.Engine - INFO - [generated in 0.00784s] ('admin@admin.com', 1, 0)
+2025-10-31 05:20:33 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:22:36 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:22:36 - sqlalchemy.engine.Engine - INFO - SELECT 1
+2025-10-31 05:22:36 - sqlalchemy.engine.Engine - INFO - [cached since 216.7s ago] ()
+2025-10-31 05:22:36 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-10-31 05:23:54 - root - INFO - [OK] Logging initialized
+2025-10-31 05:23:54 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:23:54 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:23:54 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:23:54 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:23:54 - sqlalchemy.engine.Engine - INFO - [generated in 0.00182s] ('active',)
+2025-10-31 05:23:54 - app.services.faiss_service - WARNING - No persons found in database
+2025-10-31 05:23:54 - app.services.faiss_service - INFO - [OK] FAISS index built from database
+2025-10-31 05:23:54 - app - INFO - [OK] FAISS service initialized
+2025-10-31 05:23:58 - app.services.cache_service - WARNING - [WARNING] Redis unavailable: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Using memory cache.
+2025-10-31 05:23:58 - app - INFO - [OK] Cache service initialized
+2025-10-31 05:23:58 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:23:58 - app - INFO - [OK] API Blueprints registered
+2025-10-31 05:23:58 - app - INFO - [OK] API-only application created: development mode
+2025-10-31 05:23:58 - __main__ - INFO - Starting Smart Attendance API
+2025-10-31 05:23:58 - __main__ - INFO - Environment: development
+2025-10-31 05:23:58 - __main__ - INFO - Port: 10000
+2025-10-31 05:23:58 - __main__ - INFO - Debug: True
+2025-10-31 05:24:01 - root - INFO - [OK] Logging initialized
+2025-10-31 05:24:02 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:24:02 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:24:02 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:24:02 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:24:02 - sqlalchemy.engine.Engine - INFO - [generated in 0.00240s] ('active',)
+2025-10-31 05:24:02 - app.services.faiss_service - WARNING - No persons found in database
+2025-10-31 05:24:02 - app.services.faiss_service - INFO - [OK] FAISS index built from database
+2025-10-31 05:24:02 - app - INFO - [OK] FAISS service initialized
+2025-10-31 05:24:06 - app.services.cache_service - WARNING - [WARNING] Redis unavailable: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Using memory cache.
+2025-10-31 05:24:06 - app - INFO - [OK] Cache service initialized
+2025-10-31 05:24:06 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:24:06 - app - INFO - [OK] API Blueprints registered
+2025-10-31 05:24:06 - app - INFO - [OK] API-only application created: development mode
+2025-10-31 05:24:06 - __main__ - INFO - Starting Smart Attendance API
+2025-10-31 05:24:06 - __main__ - INFO - Environment: development
+2025-10-31 05:24:06 - __main__ - INFO - Port: 10000
+2025-10-31 05:24:06 - __main__ - INFO - Debug: True
+2025-10-31 05:24:06 - werkzeug - WARNING -  * Debugger is active!
+2025-10-31 05:31:44 - root - INFO - [OK] Logging initialized
+2025-10-31 05:31:44 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:31:44 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:31:44 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:31:44 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:31:44 - sqlalchemy.engine.Engine - INFO - [generated in 0.00565s] ('active',)
+2025-10-31 05:31:44 - app.services.faiss_service - WARNING - No persons found in database
+2025-10-31 05:31:44 - app.services.faiss_service - INFO - [OK] FAISS index built from database
+2025-10-31 05:31:44 - app - INFO - [OK] FAISS service initialized
+2025-10-31 05:31:48 - app.services.cache_service - WARNING - [WARNING] Redis unavailable: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Using memory cache.
+2025-10-31 05:31:48 - app - INFO - [OK] Cache service initialized
+2025-10-31 05:31:48 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:31:49 - app - INFO - [OK] API Blueprints registered
+2025-10-31 05:31:49 - app - INFO - [OK] API-only application created: development mode
+2025-10-31 05:31:49 - __main__ - INFO - Starting Smart Attendance API
+2025-10-31 05:31:49 - __main__ - INFO - Environment: development
+2025-10-31 05:31:49 - __main__ - INFO - Port: 10000
+2025-10-31 05:31:49 - __main__ - INFO - Debug: True
+2025-10-31 05:31:49 - werkzeug - WARNING -  * Debugger is active!
+2025-10-31 05:31:56 - root - INFO - [OK] Logging initialized
+2025-10-31 05:31:57 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:31:57 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:31:57 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:31:57 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:31:57 - sqlalchemy.engine.Engine - INFO - [generated in 0.00525s] ('active',)
+2025-10-31 05:31:57 - app.services.faiss_service - WARNING - No persons found in database
+2025-10-31 05:31:57 - app.services.faiss_service - INFO - [OK] FAISS index built from database
+2025-10-31 05:31:57 - app - INFO - [OK] FAISS service initialized
+2025-10-31 05:32:01 - app.services.cache_service - WARNING - [WARNING] Redis unavailable: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Using memory cache.
+2025-10-31 05:32:01 - app - INFO - [OK] Cache service initialized
+2025-10-31 05:32:01 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:32:01 - app - INFO - [OK] API Blueprints registered
+2025-10-31 05:32:01 - app - INFO - [OK] API-only application created: development mode
+2025-10-31 05:32:01 - __main__ - INFO - Starting Smart Attendance API
+2025-10-31 05:32:01 - __main__ - INFO - Environment: development
+2025-10-31 05:32:01 - __main__ - INFO - Port: 10000
+2025-10-31 05:32:01 - __main__ - INFO - Debug: True
+2025-10-31 05:32:01 - werkzeug - WARNING -  * Debugger is active!
+2025-10-31 05:56:54 - root - INFO - [OK] Logging initialized
+2025-10-31 05:56:55 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:56:55 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:56:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:56:55 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:56:55 - sqlalchemy.engine.Engine - INFO - [generated in 0.03478s] ('active',)
+2025-10-31 05:56:55 - app.services.faiss_service - WARNING - No persons found in database
+2025-10-31 05:56:55 - app.services.faiss_service - INFO - [OK] FAISS index built from database
+2025-10-31 05:56:55 - app - INFO - [OK] FAISS service initialized
+2025-10-31 05:57:00 - app.services.cache_service - WARNING - [WARNING] Redis unavailable: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Using memory cache.
+2025-10-31 05:57:00 - app - INFO - [OK] Cache service initialized
+2025-10-31 05:57:00 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:57:00 - app - INFO - [OK] API Blueprints registered
+2025-10-31 05:57:00 - app - INFO - [OK] API-only application created: development mode
+2025-10-31 05:57:00 - __main__ - INFO - Starting Smart Attendance API
+2025-10-31 05:57:00 - __main__ - INFO - Environment: development
+2025-10-31 05:57:00 - __main__ - INFO - Port: 10000
+2025-10-31 05:57:00 - __main__ - INFO - Debug: True
+2025-10-31 05:57:00 - werkzeug - WARNING -  * Debugger is active!
+2025-10-31 05:57:24 - root - INFO - [OK] Logging initialized
+2025-10-31 05:57:24 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 05:57:25 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 05:57:25 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 05:57:25 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 05:57:25 - sqlalchemy.engine.Engine - INFO - [generated in 0.03571s] ('active',)
+2025-10-31 05:57:25 - app.services.faiss_service - WARNING - No persons found in database
+2025-10-31 05:57:25 - app.services.faiss_service - INFO - [OK] FAISS index built from database
+2025-10-31 05:57:25 - app - INFO - [OK] FAISS service initialized
+2025-10-31 05:57:30 - app.services.cache_service - WARNING - [WARNING] Redis unavailable: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Using memory cache.
+2025-10-31 05:57:30 - app - INFO - [OK] Cache service initialized
+2025-10-31 05:57:30 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 05:57:30 - app - INFO - [OK] API Blueprints registered
+2025-10-31 05:57:30 - app - INFO - [OK] API-only application created: development mode
+2025-10-31 05:57:30 - __main__ - INFO - Starting Smart Attendance API
+2025-10-31 05:57:30 - __main__ - INFO - Environment: development
+2025-10-31 05:57:30 - __main__ - INFO - Port: 10000
+2025-10-31 05:57:30 - __main__ - INFO - Debug: True
+2025-10-31 05:57:30 - werkzeug - WARNING -  * Debugger is active!
+2025-10-31 06:07:34 - root - INFO - [OK] Logging initialized
+2025-10-31 06:07:34 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 06:07:34 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 06:07:34 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 06:07:34 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 06:07:34 - sqlalchemy.engine.Engine - INFO - [generated in 0.00882s] ('active',)
+2025-10-31 06:07:34 - app.services.faiss_service - WARNING - No persons found in database
+2025-10-31 06:07:34 - app.services.faiss_service - INFO - [OK] FAISS index built from database
+2025-10-31 06:07:34 - app - INFO - [OK] FAISS service initialized
+2025-10-31 06:07:39 - app.services.cache_service - WARNING - [WARNING] Redis unavailable: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Using memory cache.
+2025-10-31 06:07:39 - app - INFO - [OK] Cache service initialized
+2025-10-31 06:07:39 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-10-31 06:07:39 - app - INFO - [OK] API Blueprints registered
+2025-10-31 06:07:39 - app - INFO - [OK] API-only application created: development mode
+2025-10-31 06:07:39 - __main__ - INFO - Starting Smart Attendance API
+2025-10-31 06:07:39 - __main__ - INFO - Environment: development
+2025-10-31 06:07:39 - __main__ - INFO - Port: 10000
+2025-10-31 06:07:39 - __main__ - INFO - Debug: True
+2025-10-31 06:07:39 - werkzeug - WARNING -  * Debugger is active!
+2025-10-31 06:07:55 - root - INFO - [OK] Logging initialized
+2025-10-31 06:07:55 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-10-31 06:07:55 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-10-31 06:07:55 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-10-31 06:07:55 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-10-31 06:07:55 - sqlalchemy.engine.Engine - INFO - [generated in 0.00456s] ('active',)
+2025-10-31 06:07:55 - app.services.faiss_service - WARNING - No persons found in database
+2025-10-31 06:07:55 - app.services.faiss_service - INFO - [OK] FAISS index built from database
+2025-10-31 06:07:55 - app - INFO - [OK] FAISS service initialized
+2025-10-31 06:07:59 - app.services.cache_service - WARNING - [WARNING] Redis unavailable: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Using memory cache.
+2025-10-31 06:07:59 - app - INFO - [OK] Cache service initialized
+2025-10-31 06:07:59 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-11-03 19:53:49 - root - INFO - [OK] Logging initialized
+2025-11-03 19:53:50 - faiss.loader - INFO - Loading faiss with AVX2 support.
+2025-11-03 19:53:51 - faiss.loader - INFO - Successfully loaded faiss with AVX2 support.
+2025-11-03 19:53:51 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-11-03 19:53:51 - sqlalchemy.engine.Engine - INFO - SELECT persons.id AS persons_id, persons.name AS persons_name, persons.embedding AS persons_embedding, persons.embedding_dim AS persons_embedding_dim, persons.photos_count AS persons_photos_count, persons.status AS persons_status, persons.enrollment_date AS persons_enrollment_date 
+FROM persons 
+WHERE persons.status = ?
+2025-11-03 19:53:51 - sqlalchemy.engine.Engine - INFO - [generated in 0.00115s] ('active',)
+2025-11-03 19:53:51 - app.services.faiss_service - WARNING - No persons found in database
+2025-11-03 19:53:51 - app.services.faiss_service - INFO - [OK] FAISS index built from database
+2025-11-03 19:53:51 - app - INFO - [OK] FAISS service initialized
+2025-11-03 19:53:52 - app.services.cache_service - WARNING - [WARNING] Redis unavailable: Error 11001 connecting to red-d427ukeuk2gs73bc97t0:6379. getaddrinfo failed.. Using memory cache.
+2025-11-03 19:53:52 - app - INFO - [OK] Cache service initialized
+2025-11-03 19:53:52 - sqlalchemy.engine.Engine - INFO - ROLLBACK

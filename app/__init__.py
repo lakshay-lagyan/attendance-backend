@@ -60,15 +60,22 @@ def create_app(config_name='production'):
         cors_origins = ['https://attendance-frontend-p3xd.onrender.com']
     
     # Add localhost for development testing
-    if config_name == 'development' or app.debug:
-        cors_origins.extend([
+    # Check both DEBUG mode and ALLOW_LOCAL_CORS config flag
+    allow_local = app.config.get('ALLOW_LOCAL_CORS', False) or app.debug or config_name == 'development'
+    if allow_local:
+        localhost_origins = [
             'http://localhost:5500',
             'http://127.0.0.1:5500',
             'http://localhost:3000',
             'http://127.0.0.1:3000',
             'http://localhost:8080',
             'http://127.0.0.1:8080'
-        ])
+        ]
+        # Add only if not already present
+        for origin in localhost_origins:
+            if origin not in cors_origins:
+                cors_origins.append(origin)
+        logger.info("Localhost CORS enabled for development/testing")
     
     logger.info(f"CORS enabled for origins: {cors_origins}")
     

@@ -58,11 +58,13 @@ class ProductionConfig:
     JWT_HEADER_NAME = 'Authorization'
     JWT_HEADER_TYPE = 'Bearer'
     
-    # CORS
-    CORS_ORIGINS = os.getenv('FRONTEND_URL', 'https://attendance-frontend-p3xd.onrender.com').split(',')
+    # CORS - Support both production and local development
+    frontend_url_env = os.getenv('FRONTEND_URL', 'https://attendance-frontend-p3xd.onrender.com')
+    CORS_ORIGINS = [url.strip() for url in frontend_url_env.split(',') if url.strip()]
     CORS_SUPPORTS_CREDENTIALS = True
     CORS_MAX_AGE = 3600
-    ALLOW_LOCAL_CORS = os.getenv('ALLOW_LOCAL_CORS', 'true').lower() == 'true'  # Allow localhost for testing
+    # Enable localhost for testing - set to 'false' in production if needed
+    ALLOW_LOCAL_CORS = os.getenv('ALLOW_LOCAL_CORS', 'true').lower() == 'true'
     
     # Rate Limiting
     RATELIMIT_STORAGE_URL = REDIS_URL
