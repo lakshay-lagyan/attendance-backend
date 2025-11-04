@@ -1,5 +1,5 @@
 import logging
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_compress import Compress
 from flask_cors import CORS
 from flask_limiter import Limiter
@@ -7,7 +7,6 @@ from flask_limiter.util import get_remote_address
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
-# from flask_session import Session  # Temporarily commented - will add after testing
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from config import config
@@ -19,7 +18,6 @@ db = SQLAlchemy()
 migrate = Migrate()
 compress = Compress()
 jwt = JWTManager()
-# sess = Session()  # Temporarily commented - using Flask's built-in session
 limiter = Limiter(
     key_func=get_remote_address,
     default_limits=["200 per hour"],
@@ -43,44 +41,76 @@ def create_app(config_name='production'):
     migrate.init_app(app, db)
     compress.init_app(app)
     jwt.init_app(app)
-    # sess.init_app(app)  # Temporarily commented - using Flask's built-in session
     
     if app.config.get('REDIS_URL'):
         limiter.storage_uri = app.config['REDIS_URL']
     limiter.init_app(app)
     
-    # Configure CORS for frontend access
-    frontend_urls = app.config.get('CORS_ORIGINS', ['https://attendance-frontend-p3xd.onrender.com'])
-    
-    # Add common localhost ports for development/testing
-    # IMPORTANT: For testing only - tighten this in production!
-    local_origins = [
+    # ===== CRITICAL: CORS CONFIGURATION =====
+    # Define allowed origins explicitly
+    allowed_origins = [
+        'https://attendance-frontend-p3xd.onrender.com',  # Your Render frontend
         'http://localhost:5500',
         'http://127.0.0.1:5500',
         'http://localhost:3000',
         'http://127.0.0.1:3000',
         'http://localhost:8000',
         'http://127.0.0.1:8000',
-        'http://localhost:8080',
-        'http://127.0.0.1:8080',
-        'http://localhost:5000',
-        'http://127.0.0.1:5000',
-        'null'  # For file:// protocol during testing
     ]
     
-    # Always add localhost for testing (can be controlled via env var)
-    allow_local = app.config.get('ALLOW_LOCAL_CORS', True)
-    if allow_local:
-        frontend_urls.extend(local_origins)
+    # Add any additional origins from environment
+    extra_origins = app.config.get('CORS_ORIGINS', [])
+    if extra_origins:
+        allowed_origins.extend(extra_origins)
     
+    # Configure CORS with explicit settings
     CORS(app, 
-         resources={r"/*": {"origins": frontend_urls if frontend_urls else "*"}},
-         supports_credentials=True,
-         allow_headers=["Content-Type", "Authorization", "X-Requested-With"],
-         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-         expose_headers=["Content-Type", "Authorization"],
-         max_age=3600
+         resources={
+             r"/*": {
+                 "origins": allowed_origins,
+                 "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+                 "allow_headers": [
+                     "Content-Type", 
+                     "Authorization", 
+                     "X-Requested-With",
+                     "Accept",
+                     "Origin"
+                 ],
+                 "expose_headers": ["Content-Type", "Authorization"],
+                 "supports_credentials": True,
+                 "max_age": 3600
+             }
+         },
+         supports_credentials=True
     )
+    
+    # Add CORS headers to all responses (belt and suspenders approach)
+    @app.after_request
+    def after_request(response):
+        origin = request.headers.get('Origin')
+        if origin in allowed_origins:
+            response.headers['Access-Control-Allow-Origin'] = origin
+            response.headers['Access-Control-Allow-Credentials'] = 'true'
+            response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+            response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With, Accept, Origin'
+            response.headers['Access-Control-Expose-Headers'] = 'Content-Type, Authorization'
+        return response
+    
+    # Handle OPTIONS requests explicitly
+    @app.before_request
+    def handle_preflight():
+        from flask import request
+        if request.method == "OPTIONS":
+            response = app.make_default_options_response()
+            origin = request.headers.get('Origin')
+            if origin in allowed_origins:
+                response.headers['Access-Control-Allow-Origin'] = origin
+                response.headers['Access-Control-Allow-Credentials'] = 'true'
+                response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+                response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With, Accept, Origin'
+            return response
+    
+    logger.info(f"[OK] CORS configured for origins: {allowed_origins}")
     
     # Initialize services
     with app.app_context():
