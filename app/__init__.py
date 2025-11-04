@@ -47,35 +47,38 @@ def create_app(config_name='production'):
     limiter.init_app(app)
     
     # ===== CRITICAL: CORS CONFIGURATION =====
-    # Define allowed origins explicitly
-    allowed_origins = [
-        'https://attendance-frontend-p3xd.onrender.com',  # Your Render frontend
-        'http://localhost:5500',
-        'http://127.0.0.1:5500',
-        'http://localhost:3000',
-        'http://127.0.0.1:3000',
-        'http://localhost:8000',
-        'http://127.0.0.1:8000',
-    ]
+    # Configure CORS for frontend access
+    # Get configured origins from config
+    cors_origins = app.config.get('CORS_ORIGINS', [])
     
-    # Add any additional origins from environment
-    extra_origins = app.config.get('CORS_ORIGINS', [])
-    if extra_origins:
-        allowed_origins.extend(extra_origins)
+    # Ensure we have a list
+    if isinstance(cors_origins, str):
+        cors_origins = [cors_origins]
     
-    # Configure CORS with explicit settings
+    # Default frontend URLs if none configured
+    if not cors_origins:
+        cors_origins = ['https://attendance-frontend-p3xd.onrender.com']
+    
+    # Add localhost for development testing
+    if config_name == 'development' or app.debug:
+        cors_origins.extend([
+            'http://localhost:5500',
+            'http://127.0.0.1:5500',
+            'http://localhost:3000',
+            'http://127.0.0.1:3000',
+            'http://localhost:8080',
+            'http://127.0.0.1:8080'
+        ])
+    
+    logger.info(f"CORS enabled for origins: {cors_origins}")
+    
+    # Apply CORS with explicit configuration
     CORS(app, 
          resources={
-             r"/*": {
-                 "origins": allowed_origins,
+             r"/api/*": {
+                 "origins": cors_origins,
                  "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-                 "allow_headers": [
-                     "Content-Type", 
-                     "Authorization", 
-                     "X-Requested-With",
-                     "Accept",
-                     "Origin"
-                 ],
+                 "allow_headers": ["Content-Type", "Authorization", "X-Requested-With", "Accept", "Origin"],
                  "expose_headers": ["Content-Type", "Authorization"],
                  "supports_credentials": True,
                  "max_age": 3600
@@ -88,7 +91,7 @@ def create_app(config_name='production'):
     @app.after_request
     def after_request(response):
         origin = request.headers.get('Origin')
-        if origin in allowed_origins:
+        if origin in cors_origins:
             response.headers['Access-Control-Allow-Origin'] = origin
             response.headers['Access-Control-Allow-Credentials'] = 'true'
             response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
@@ -103,14 +106,14 @@ def create_app(config_name='production'):
         if request.method == "OPTIONS":
             response = app.make_default_options_response()
             origin = request.headers.get('Origin')
-            if origin in allowed_origins:
+            if origin in cors_origins:
                 response.headers['Access-Control-Allow-Origin'] = origin
                 response.headers['Access-Control-Allow-Credentials'] = 'true'
                 response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
                 response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With, Accept, Origin'
             return response
     
-    logger.info(f"[OK] CORS configured for origins: {allowed_origins}")
+    logger.info(f"[OK] CORS configured for origins: {cors_origins}")
     
     # Initialize services
     with app.app_context():
